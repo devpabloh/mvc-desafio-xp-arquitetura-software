@@ -16,14 +16,17 @@ model Client{
   phone Int
 
   // relacionamento com a tabela de pedido
-  pedidos Pedido[]
+  orders Order[]
+
+   @@map("clientes")
 }
 
-model Pedido{
+model Order{
   id Int @id @default(autoincrement())
   order String
   clientId Int
 
-
   client Client @relation(fields: [clientId], references: [id]) // aqui estamos dizendo que o clientID está da tabela Pedido está relacionado com o ID da tabela client
+
+  @@map("pedidos")
 }
