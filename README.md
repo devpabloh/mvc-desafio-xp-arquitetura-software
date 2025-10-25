@@ -41,13 +41,23 @@ Draw.io -
 
 ## Arquitetura de pastas e explicação dos componentes
 
-src/
-├── Server.ts                  # Arquivo principal do Express (inicia o servidor)
-├── models/                 # O M de MVC (Entidades de Domínio/Interfaces)
-│   └── Produto.ts
-├── repositories/           # Repositórios (interação com o banco de dados)
-│   └── ProdutoRepository.ts
-├── services/               # Lógica de Negócios (regras de domínio)
-│   └── ProdutoService.ts
-└── controllers/            # O C de MVC (Recebe requisições HTTP)
-    └── ProdutoController.ts
+desafio-api-mvc/
+├── prisma/                 # Configuração do Prisma e migrações
+│   └── schema.prisma       # Definição do nosso MODEL
+├── src/                    # Nosso código-fonte
+│   ├── controllers/        # CONTROLADORES: Recebem requisições HTTP 
+│   │   └── ClienteController.ts
+│   ├── services/           # SERVIÇOS: Contêm a Lógica de Negócios
+│   │   └── ClienteService.ts
+│   ├── repositories/       # REPOSITÓRIOS: Lidam com o acesso aos dados
+│   │   └── ClienteRepository.ts 
+│   ├── routes/             # Define as URLs (ex: /clientes)
+│   │   └── index.ts
+│   │   └── cliente.routes.ts
+│   ├── config/             # Configurações (ex: Swagger)
+│   │   └── swagger.ts
+│   └── server.ts            # Arquivo principal que inicia o servidor
+├── .eslintrc.json          # Configs do ESLint
+├── .prettierrc.json        # Configs do Prettier
+├── package.json
+└── tsconfig.json

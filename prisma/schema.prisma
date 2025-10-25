@@ -1,0 +1,29 @@
+
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Client{
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  phone Int
+
+  // relacionamento com a tabela de pedido
+  pedidos Pedido[]
+}
+
+model Pedido{
+  id Int @id @default(autoincrement())
+  order String
+  clientId Int
+
+
+  client Client @relation(fields: [clientId], references: [id]) // aqui estamos dizendo que o clientID está da tabela Pedido está relacionado com o ID da tabela client
+}
