@@ -2,7 +2,7 @@ import {PrismaClient} from '@prisma/client'
 import type { Client } from "../models/Client.js";
 import {prisma} from '../lib/prisma.js'
 
-export class clientRepository{
+export class ClientRepository{
     private prisma: PrismaClient
 
     constructor(){
@@ -36,7 +36,11 @@ export class clientRepository{
       })
     }
 
-    public async delete(id:number): Promise<void>{
-      await this.prisma.client.delete({where: {id}})
+    public async delete(id:number): Promise<Client>{
+      try {
+        return await this.prisma.client.delete({where: {id}})
+      } catch (error) {
+        throw new Error(`Error deleting client with id ${id}: ${error.message}`)
+      }
     }
 }

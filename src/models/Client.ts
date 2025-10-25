@@ -1,6 +1,6 @@
-export interface Client{
+export type Client = {
     id: number
     name: string;
     email: string;
-    phone: number
+    phone: string
 }

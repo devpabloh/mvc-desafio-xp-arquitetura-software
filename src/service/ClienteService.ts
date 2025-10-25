@@ -1,4 +1,4 @@
-import { Client } from "../models/Client.js";
+import type { Client } from "../models/Client.js";
 import { ClientRepository } from "../repository/ClientRepository.js";
 
 export class ClientService{
@@ -34,5 +34,9 @@ export class ClientService{
 
   public async updatedClient(id: number, data: Partial<Omit<Client,"id">>): Promise<Client | null>{
     return this.clientRepository.update(id,data)
+  }
+
+  public async deletarCliente(id: number): Promise<Client> {
+    return this.clientRepository.delete(id);
   }
 }

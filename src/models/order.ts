@@ -1,5 +1,5 @@
 export interface Order{
     id: number;
-    order: String;
+    order: string;
     clientId: number;
 }

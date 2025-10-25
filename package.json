@@ -12,22 +12,27 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
-    "ts-node-dev": "^2.0.0",
+    "prisma": "^6.18.0",
+    "tsx": "^4.19.2",
     "typescript": "^5.9.3"
   },
   "name": "mvc-desafio-xp-arquitetura-software",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "tsx watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
     "start": "node dist/app.js"
   },
-  "keywords": ["mvc", "Arquitetura de software", "e-commerce"],
+  "keywords": [
+    "mvc",
+    "Arquitetura de software",
+    "e-commerce"
+  ],
   "author": "Pablo Henrique Ferreira de França",
   "license": "ISC",
   "type": "module",
@@ -35,7 +40,6 @@
     "@prisma/client": "^6.18.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "prisma": "^6.18.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }
