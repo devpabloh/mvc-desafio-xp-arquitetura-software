@@ -28,11 +28,8 @@ export class ClientController{
      *               items:
      *                 $ref: '#/components/schemas/Cliente'
      */
-    // Find All [cite: 115-117]
     this.router.get('/', async (req: Request, res: Response) => {
-      // 1. Pede ao Service
       const clientes = await this.clientService.findAll();
-      // 2. Retorna a Resposta (View JSON)
       res.status(200).json(clientes);
     });
 
@@ -54,7 +51,7 @@ export class ClientController{
      *                   type: integer
      *                   example: 10
      */
-    // Count [cite: 128-130]
+    
     this.router.get('/contar', async (req: Request, res: Response) => {
       const contagem = await this.clientService.countClients();
       res.status(200).json({ count: contagem });
@@ -83,7 +80,6 @@ export class ClientController{
      *               items:
      *                 $ref: '#/components/schemas/Cliente'
      */
-    // Find By Name [cite: 125-127]
     this.router.get('/nome/:nome', async (req: Request, res: Response) => {
       const { nome } = req.params;
       const clientes = await this.clientService.findByName(nome);
@@ -113,7 +109,6 @@ export class ClientController{
      * 404:
      * description: Cliente não encontrado
      */
-    // Find By ID [cite: 118-124]
     this.router.get('/:id', async (req: Request, res: Response) => {
       const { id } = req.params;
       const cliente = await this.clientService.findById(Number(id));
@@ -121,7 +116,6 @@ export class ClientController{
       if (cliente) {
         res.status(200).json(cliente);
       } else {
-        // Equivalente ao ResponseEntity.notFound().build() [cite: 122]
         res.status(404).json({ message: 'Cliente não encontrado' });
       }
     });
@@ -146,15 +140,13 @@ export class ClientController{
      * schema:
      * $ref: '#/components/schemas/Cliente'
      */
-    // Create [cite: 131-133]
     this.router.post('/', async (req: Request, res: Response) => {
-      // O `req.body` contém o JSON enviado pelo usuário
       const { name, email } = req.body;
       try {
         const novoCliente = await this.clientService.createClient({ name, email });
-        res.status(201).json(novoCliente); // 201 = Created
+        res.status(201).json(novoCliente);
       } catch (error) {
-        res.status(400).json({ message: (error as Error).message }); // 400 = Bad Request
+        res.status(400).json({ message: (error as Error).message });
       }
     });
 
@@ -218,7 +210,6 @@ export class ClientController{
      * 404:
      * description: Cliente não encontrado
      */
-    // Delete [cite: 134-136]
     this.router.delete('/:id', async (req: Request, res: Response) => {
       const { id } = req.params;
       await this.clientService.deletarCliente(Number(id))
