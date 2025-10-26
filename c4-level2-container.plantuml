@@ -1,0 +1,16 @@
+@startuml C4_Container_Diagram
+!include <C4/C4_Container.puml>
+
+Person(user, "Parceiro / Usuário da API", "Qualquer sistema parceiro que consuma os dados da API REST")
+
+System_boundary(api_system, "Sistema de API de clientes"){
+
+    container(api, "API REST", "Node.js, Express e Typescript", "Expõe os endpoints como de criação, leitura, atualização, deletar e quantidade de clientes")
+
+    container(db, "Banco de dados", "SQLite", "Armazena os dados dos clientes")
+}
+
+rel(user, api, "Faz requisições HTTP", "JSON/HTTPS")
+rel(api, db, "Interage com o banco de dados lendo e armazenando os dados", "Prisma client")
+
+@enduml

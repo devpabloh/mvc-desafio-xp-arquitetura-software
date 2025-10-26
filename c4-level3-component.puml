@@ -1,0 +1,41 @@
+@startuml C4_Component_Diagram
+
+!include <C4/C4_Component.puml>
+
+Person_Ext(user, "Parceiro / Usuário da API", "Faz requisições HTTP.") 
+
+ContainerDb_Ext(db, "Banco de Dados", "SQLite", "Armazena os dados.") 
+
+Container_Boundary(api_container, "Container: API REST") {
+
+    ' Componente 1: O Ponto de Entrada (Controller)
+    Component(controller, "ClienteController", "TypeScript / Express", "Recebe requisições HTTP, valida entradas e chama o Service.")
+
+    ' Componente 2: A Lógica de Negócios (Service)
+    Component(service, "ClienteService", "TypeScript", "Implementa a lógica de negócios (validações, orquestração).")
+
+    ' Componente 3: A Lógica de Dados (Repository)
+    Component(repository, "ClienteRepository", "TypeScript", "Abstrai e encapsula a lógica de acesso ao banco de dados (prisma client).")
+
+    ' Componente 4: O ORM (Detalhe de implementação do Repositório)
+    Component(prisma, "Prisma Client", "Library", "ORM que traduz chamadas de método para SQL.")
+}
+
+' Aqui estão os relacionamentos entre os componentes
+
+' Usuário envia requisição para o Controller
+Rel(user, controller, "Usa", "JSON/HTTPS")
+
+' Controller usa o Service
+Rel(controller, service, "Usa", "Chama métodos do service")
+
+' Service usa o Repository
+Rel(service, repository, "Usa", "Chama métodos do repository")
+
+' Repository usa o Prisma Client
+Rel(repository, prisma, "Usa", "Chama métodos (findByName, findById, create, update, delete, etc.)")
+
+' Prisma Client fala com o Banco de Dados
+Rel(prisma, db, "Lê/Escreve", "SQL")
+
+@enduml
